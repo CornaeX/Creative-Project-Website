@@ -1,29 +1,30 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static('public'));
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Set view engine (if you are using a templating engine)
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html'); // Adjust this based on your view engine
+
+// Define routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-app.get('/arduino', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-app.get('/ipst', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'IPST.html'));
-});
-app.get('/esp8266', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'ESP8266.html'));
-});
-app.get('/openkb', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'OPENKB.html'));
-});
-app.get('/creater', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'Creater.html'));
+    res.sendFile(path.join(__dirname, 'views', 'homepage.html'));
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+// Other routes (about, contact)
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'about.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'contact.html'));
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
