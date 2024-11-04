@@ -5,6 +5,11 @@ const app = express();
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'index.html'));
 });
@@ -25,4 +30,3 @@ app.get('/creater', (req, res) => {
 });
 
 module.exports = app;
-
