@@ -24,6 +24,5 @@ app.get('/creater', (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'Creater.html'));
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
-});
+module.exports = app;
+
